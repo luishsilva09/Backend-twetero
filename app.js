@@ -14,4 +14,14 @@ app.post('/sign-up',(request,response) =>{
     response.send("OK")
 })
 
+app.post('/tweets',(request, response) =>{
+    tweet.push(request.body)
+    let usuarioAtual = usuario.find(avatarAtual => avatarAtual.username === request.body.username)
+    tweets.push({
+        username: request.body.username,
+        avatar: usuarioAtual.avatar,
+        tweet: request.body.tweet
+    })
+    response.send("OK")
+})
 app.listen(5000)
