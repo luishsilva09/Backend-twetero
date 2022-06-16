@@ -24,4 +24,7 @@ app.post('/tweets',(request, response) =>{
     })
     response.send("OK")
 })
+app.get('/tweets', (request,response) =>{
+    response.send(tweets)
+})
 app.listen(5000)
