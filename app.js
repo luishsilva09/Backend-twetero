@@ -17,7 +17,7 @@ app.post('/sign-up',(request,response) =>{
 app.post('/tweets',(request, response) =>{
     tweet.push(request.body)
     let usuarioAtual = usuario.find(avatarAtual => avatarAtual.username === request.body.username)
-    tweets.push({
+    tweets.unshift({
         username: request.body.username,
         avatar: usuarioAtual.avatar,
         tweet: request.body.tweet
@@ -25,6 +25,9 @@ app.post('/tweets',(request, response) =>{
     response.send("OK")
 })
 app.get('/tweets', (request,response) =>{
+    if(tweets.length > 10){
+        tweets.length = 10
+    }
     response.send(tweets)
 })
 app.listen(5000)
