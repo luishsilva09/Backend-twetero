@@ -7,58 +7,7 @@ app.use(express.json());
 
 let usuarios = []
 let tweet = []
-let tweets = [
-    {
-        "username": "luis",
-        "avatar": "https://sm.ign.com/ign_br/screenshot/default/naruto-shippuden_f134.png",
-        "tweet": "10"
-      },
-      {
-        "username": "luis",
-        "avatar": "https://sm.ign.com/ign_br/screenshot/default/naruto-shippuden_f134.png",
-        "tweet": "9"
-      },
-      {
-        "username": "luis",
-        "avatar": "https://sm.ign.com/ign_br/screenshot/default/naruto-shippuden_f134.png",
-        "tweet": "8"
-      },
-      {
-        "username": "luis",
-        "avatar": "https://sm.ign.com/ign_br/screenshot/default/naruto-shippuden_f134.png",
-        "tweet": "7"
-      },
-      {
-        "username": "luis",
-        "avatar": "https://sm.ign.com/ign_br/screenshot/default/naruto-shippuden_f134.png",
-        "tweet": "6"
-      },
-      {
-        "username": "luis",
-        "avatar": "https://sm.ign.com/ign_br/screenshot/default/naruto-shippuden_f134.png",
-        "tweet": "5"
-      },
-      {
-        "username": "luis",
-        "avatar": "https://sm.ign.com/ign_br/screenshot/default/naruto-shippuden_f134.png",
-        "tweet": "4"
-      },
-      {
-        "username": "luis",
-        "avatar": "https://sm.ign.com/ign_br/screenshot/default/naruto-shippuden_f134.png",
-        "tweet": "3"
-      },
-      {
-        "username": "luis",
-        "avatar": "https://sm.ign.com/ign_br/screenshot/default/naruto-shippuden_f134.png",
-        "tweet": "2"
-      },
-      {
-        "username": "luis",
-        "avatar": "https://sm.ign.com/ign_br/screenshot/default/naruto-shippuden_f134.png",
-        "tweet": "1"
-      }
-]
+let tweets = []
 
 app.post('/sign-up',(request,response) =>{
     if(request.body.username.trim() === '' || request.body.avatar.trim() === ''){
@@ -103,6 +52,13 @@ app.get('/tweets', (request,response) =>{
         }
         response.send(atualizaTweets) 
     }  
-    
+    if(page < 1){
+      response.status(400).send('Informe uma página válida!')
+    }
+})
+app.get('/tweets/:username',(request,response) => {
+  let user = request.params.username
+  let tweetUser = tweets.filter(e => e.username === user)
+  response.send(tweetUser)
 })
 app.listen(5000)
